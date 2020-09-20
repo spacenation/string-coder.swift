@@ -3,6 +3,7 @@ import Foundation
 public final class StringDecoder {
     enum Error: Swift.Error {
         case indexOutOfBounds
+        case matchingFailed
     }
     
     private let characters: [Character]
@@ -26,6 +27,12 @@ extension StringDecoder {
     public func skip(size: Int) throws {
         guard cursor + size <= characters.count else { throw Error.indexOutOfBounds }
         cursor += size
+    }
+    
+    public func match(_ string: String) throws {
+        guard cursor + string.count <= characters.count else { throw Error.indexOutOfBounds }
+        guard String(characters.dropFirst(cursor).prefix(string.count)) == string else { throw Error.matchingFailed }
+        cursor += string.count
     }
     
     public func preview(size: Int) -> String {
