@@ -6,11 +6,16 @@ public final class StringDecoder {
         case matchingFailed
     }
     
-    private let characters: [Character]
+    let characters: [Character]
     public internal(set) var cursor: Int
     
     public init(string: String) {
         self.characters = string.map { $0 }
+        self.cursor = 0
+    }
+    
+    public init(characters: [Character]) {
+        self.characters = characters
         self.cursor = 0
     }
     
@@ -24,6 +29,12 @@ public final class StringDecoder {
 }
 
 extension StringDecoder {
+    public func copy() -> StringDecoder {
+        StringDecoder(characters: self.characters)
+    }
+}
+
+extension StringDecoder {
     public func skip(size: Int) throws {
         guard cursor + size <= characters.count else { throw Error.indexOutOfBounds }
         cursor += size
@@ -33,6 +44,10 @@ extension StringDecoder {
         guard cursor + string.count <= characters.count else { throw Error.indexOutOfBounds }
         guard String(characters.dropFirst(cursor).prefix(string.count)) == string else { throw Error.matchingFailed }
         cursor += string.count
+    }
+    
+    public func matchEmpty(size: Int = 1) throws {
+        try match(String(repeating: " ", count: size))
     }
     
     public func preview(size: Int) -> String {
