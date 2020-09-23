@@ -18,10 +18,6 @@ public final class StringDecoder {
         self.characters = characters
         self.cursor = 0
     }
-    
-    public func decode<T: StringDecodable>(_ type: T.Type = T.self) throws -> T {
-        try T(from: self)
-    }
 
     public static func decode<T: StringDecodable>(_ type: T.Type, from string: String) throws -> T {
         try T(from: StringDecoder(string: string))
@@ -54,6 +50,10 @@ extension StringDecoder {
         return String(characters.dropFirst(cursor).prefix(size))
     }
     
+    public func decode<T: StringDecodable>(_ type: T.Type = T.self) throws -> T {
+        try T(from: self)
+    }
+    
     public func decodeString() -> String {
         let substring = String(characters.dropFirst(cursor))
         cursor += substring.count
@@ -76,6 +76,15 @@ extension StringDecoder {
         let substring = characters.dropFirst(cursor).prefix(while: appendWhile)
         cursor += substring.count
         return try substring.split(separator: separatorCharacter).map { try T(from: StringDecoder(string: String($0))) }
+    }
+    
+    public func decodeArray<T: StringDecodable>(of type: T.Type, initialValue: [T] = [], separator: String) throws -> [T] {
+        if let this = try? T(from: self) {
+            try? match(separator)
+            return try self.decodeArray(of: type, initialValue: initialValue + [this], separator: separator)
+        } else {
+            return initialValue
+        }
     }
 }
 

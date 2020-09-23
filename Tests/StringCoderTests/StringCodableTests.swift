@@ -59,7 +59,7 @@ struct Payload: Equatable, StringCodable {
     }
     
     init(from decoder: StringDecoder) throws {
-        data = try decoder.decodeArray(of: UInt8.self, separatorCharacter: " ", appendWhile: { _ in true })
+        data = try decoder.decodeArray(of: UInt8.self, separator: " ")
     }
     
     func encode(to encoder: StringEncoder) throws {
@@ -77,10 +77,10 @@ extension UInt8: StringCodable {
     public init(from decoder: StringDecoder) throws {
         if decoder.preview(size: 2) == "0b" {
             try decoder.skip(size: 2)
-            guard let value = UInt8(decoder.decodeString(), radix: 2) else { throw StringDecodableError.invalid }
+            guard let value = try? UInt8(decoder.decodeString(untilFirst: " "), radix: 2) else { throw StringDecodableError.invalid }
             self = value
         } else {
-            guard let value = UInt8(decoder.decodeString()) else { throw StringDecodableError.invalidBinaryLiteral }
+            guard let value = try? UInt8(decoder.decodeString(untilFirst: " ")) else { throw StringDecodableError.invalidBinaryLiteral }
             self = value
         }
         
