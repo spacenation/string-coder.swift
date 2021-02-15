@@ -9,11 +9,10 @@ let package = Package(
         .library(name: "StringCoder", targets: ["StringCoder"])
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(name: "Coder", url: "git@github.com:spacenation/coder.swift.git", from: "0.2.2")
     ],
     targets: [
-        .target(name: "StringCoder", dependencies: []),
+        .target(name: "StringCoder", dependencies: ["Coder"]),
         .testTarget(name: "StringCoderTests", dependencies: ["StringCoder"])
     ]
 )
