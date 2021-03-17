@@ -1,7 +1,7 @@
 import XCTest
 
-import StringCoderTests
+import StringDecoderTests
 
 var tests = [XCTestCaseEntry]()
-tests += StringCoderTests.allTests()
+tests += StringDecoderTests.allTests()
 XCTMain(tests)

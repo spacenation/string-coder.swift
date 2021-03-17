@@ -1,5 +1,5 @@
-## StringCoder
-SPM package to decode and encode types from strings.
+## StringDecoder
+SPM package to decode types from strings.
 
 ### String Decoder
 ```swift

@@ -1,7 +1,7 @@
 import XCTest
 import Currying
 import Decoder
-import StringCoder
+import StringDecoder
 
 final class StringDecoderTests: XCTestCase {
     func testCharacterParser() {

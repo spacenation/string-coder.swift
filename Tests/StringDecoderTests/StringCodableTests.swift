@@ -1,5 +1,5 @@
 import XCTest
-import StringCoder
+import StringDecoder
 
 final class StringCodableTests: XCTestCase {
     func testStringDecodable() {
