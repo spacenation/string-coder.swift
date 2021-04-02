@@ -1,7 +1,6 @@
 import Foundation
-import Decoder
 
-public func match(_ s: String) -> Decoder<String, String, CharacterDecodingFailure> {
+public func match(_ s: String) -> StringReader<String> {
     if let (head, tail) = Array(s).deconstructed {
         return match(head)
             .discardThen(match(String(tail)))

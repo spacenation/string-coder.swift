@@ -2,21 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "Currying",
-        "repositoryURL": "git@github.com:spacenation/currying.swift.git",
+        "package": "Functional",
+        "repositoryURL": "git@github.com:spacenation/functional-swift.git",
         "state": {
           "branch": null,
-          "revision": "75dca19133506bee5390b847ac54801f57ec67ae",
-          "version": "0.2.1"
-        }
-      },
-      {
-        "package": "Decoder",
-        "repositoryURL": "git@github.com:spacenation/decoder.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "a9ef04faebf3948daf81095d8bb0cca060d44ce1",
-          "version": "0.3.1"
+          "revision": "cc369b3c7f031ca6ea7b43edf38d7e78b649a080",
+          "version": "0.3.2"
         }
       }
     ]
