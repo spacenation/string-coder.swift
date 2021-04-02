@@ -1,13 +1,13 @@
 import Foundation
 import Functional
 
-extension StringReader {
+extension StringDecoder {
     public static func empty(error: CharacterDecodingFailure) -> Self {
-        StringReader { _ in .failure(error) }
+        StringDecoder { _ in .failure(error) }
     }
     
     public func or(_ other: Self) -> Self {
-        StringReader<Element> { input in
+        StringDecoder<Element> { input in
             switch self.decode(input) {
             case .success(let (element, next)):
                 return .success((element, next))
@@ -18,6 +18,6 @@ extension StringReader {
     }
 }
 
-public func <|><A>(left: StringReader<A>, right: StringReader<A>) -> StringReader<A> {
+public func <|><A>(left: StringDecoder<A>, right: StringDecoder<A>) -> StringDecoder<A> {
     left.or(right)
 }

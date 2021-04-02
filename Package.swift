@@ -4,15 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "StringReader",
+    name: "StringDecoder",
     products: [
-        .library(name: "StringReader", targets: ["StringReader"])
+        .library(name: "StringDecoder", targets: ["StringDecoder"])
     ],
     dependencies: [
         .package(name: "Functional", url: "git@github.com:spacenation/functional-swift.git", from: "0.3.2")
     ],
     targets: [
-        .target(name: "StringReader", dependencies: ["Functional"]),
-        .testTarget(name: "StringReaderTests", dependencies: ["StringReader"])
+        .target(name: "StringDecoder", dependencies: ["Functional"]),
+        .testTarget(name: "StringDecoderTests", dependencies: ["StringDecoder"])
     ]
 )

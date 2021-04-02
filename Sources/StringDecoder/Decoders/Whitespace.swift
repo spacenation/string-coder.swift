@@ -1,7 +1,7 @@
 import Foundation
 
-public extension StringReader {
-    static var whitespace: StringReader<[String]> {
+public extension StringDecoder {
+    static var whitespace: StringDecoder<[String]> {
         newLine
             .or(tab)
             .or(space)

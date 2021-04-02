@@ -1,7 +1,7 @@
 import Foundation
 @_exported import Functional
 
-public struct StringReader<Element> {
+public struct StringDecoder<Element> {
     public typealias Output = Result<(element: Element, next: String), CharacterDecodingFailure>
     
     public let decode: (String) -> Output

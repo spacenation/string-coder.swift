@@ -1,7 +1,7 @@
 import Foundation
 
-public extension StringReader {
-    func separate<A>(by separator: StringReader<A>) -> StringReader<[Element]> {
+public extension StringDecoder {
+    func separate<A>(by separator: StringDecoder<A>) -> StringDecoder<[Element]> {
         separator
             .discardThen(self)
             .many
