@@ -1,11 +1,9 @@
 import XCTest
-import Currying
-import Decoder
-import StringDecoder
+import StringReader
 
-final class StringDecoderTests: XCTestCase {
+final class StringReaderTests: XCTestCase {
     func testCharacterParser() {
-        let coder: Decoder<String, Character, CharacterDecodingFailure> = .match("1")
+        let coder: StringReader<Character> = match("1")
         
         switch coder.map({ Int(String($0))! }).decode("1ice") {
         case .success(let (element, next)):
@@ -17,7 +15,7 @@ final class StringDecoderTests: XCTestCase {
     }
     
     func testCharacterParserFail() {
-        let coder: Decoder<String, Character, CharacterDecodingFailure> = .match("C")
+        let coder: StringReader<Character> = match("C")
         
         switch coder.decode("c") {
         case .success(_):
@@ -27,8 +25,8 @@ final class StringDecoderTests: XCTestCase {
         }
     }
     
-    func testStringDecoder() {
-        let coder: Decoder<String, String, CharacterDecodingFailure> = .match("this")
+    func testStringReader() {
+        let coder: StringReader<String> = match("this")
         switch coder.decode("this1") {
         case .success(let (element, next)):
             XCTAssertTrue(element == "this")
@@ -38,8 +36,8 @@ final class StringDecoderTests: XCTestCase {
         }
     }
     
-    func testStringDecoderFail() {
-        let coder: Decoder<String, String, CharacterDecodingFailure> = .match("this2")
+    func testStringReaderFail() {
+        let coder: StringReader<String> = match("this2")
         switch coder.decode("this1") {
         case .success(_):
             XCTFail()
@@ -49,8 +47,8 @@ final class StringDecoderTests: XCTestCase {
     }
 
     func testCombineParsers() {
-        let coder: Decoder<String, String, CharacterDecodingFailure> = .match("this")
-        let spaceCoder: Decoder<String, String, CharacterDecodingFailure> = .match(" ")
+        let coder: StringReader<String> = match("this")
+        let spaceCoder: StringReader<String> = match(" ")
         switch coder.discard(spaceCoder).decode("this ") {
         case .success(let (element, next)):
             XCTAssertTrue(element == "this")
@@ -61,8 +59,8 @@ final class StringDecoderTests: XCTestCase {
     }
 
     func testChoiceOperation() {
-        let boolTrue: Decoder<String, Character, CharacterDecodingFailure> = .match("t")
-        let boolFalse: Decoder<String, Character, CharacterDecodingFailure> = .match("f")
+        let boolTrue: StringReader<Character> = match("t")
+        let boolFalse: StringReader<Character> = match("f")
         
         switch boolTrue.or(boolFalse).decode("t") {
         case .success(let (element, next)):
@@ -74,7 +72,7 @@ final class StringDecoderTests: XCTestCase {
     }
 
     func testTakeWhile() {
-        let decoder: Decoder<String, String, CharacterDecodingFailure> = .takeWhile(isDigit)
+        let decoder: StringReader<String> = takeWhile(isDigit)
         switch decoder.decode("1122one") {
         case .success(let (element, next)):
             XCTAssertTrue(element == "1122")
@@ -85,7 +83,7 @@ final class StringDecoderTests: XCTestCase {
     }
 
     func testDecodingManyChars() {
-        let coder: Decoder<String, Character, CharacterDecodingFailure> = .match("c")
+        let coder: StringReader<Character> = match("c")
         
         switch coder.many.decode("ccc123") {
         case .success(let (element, next)):
@@ -105,7 +103,7 @@ final class StringDecoderTests: XCTestCase {
     }
 
     func testtDecodingManyStrings() {
-        let coder: Decoder<String, String, CharacterDecodingFailure> = .match("c1")
+        let coder: StringReader<String> = match("c1")
         
         switch coder.many.decode("c1c1c1123") {
         case .success(let (element, next)):
@@ -125,7 +123,7 @@ final class StringDecoderTests: XCTestCase {
     }
 
     func testtDecodingSome() {
-        let coder: Decoder<String, Character, CharacterDecodingFailure> = .match("c")
+        let coder: StringReader<Character> = match("c")
         
         switch coder.some(error: .mismatchedCharacter).decode("ccc123") {
         case .success(let (element, next)):
@@ -169,15 +167,14 @@ final class StringDecoderTests: XCTestCase {
             let argument: [String]
         }
 
-        let argumentDecoder: Decoder<String, String, CharacterDecodingFailure> =
-            .takeWhile({ $0 != " " && $0 != ")" })
+        let argumentDecoder: StringReader<String> =
+            takeWhile({ $0 != " " && $0 != ")" })
 
-        let systemCallDecoder =
-            Decoder<String, Character, CharacterDecodingFailure>.match("(")
-                .discardThen(argumentDecoder.separate(by: .match(" ")))
-                .discard(Decoder<String, Character, CharacterDecodingFailure>.match(")"))
+        let systemCallDecoder = match("(")
+                .discardThen(argumentDecoder.separate(by: match(" ")))
+                .discard(match(")"))
                 .apply(
-                    Decoder<String, String, CharacterDecodingFailure>.takeWhile({ $0 != "(" })
+                    takeWhile({ $0 != "(" })
                         .map(curry(SystemCall.init))
                 )
 
