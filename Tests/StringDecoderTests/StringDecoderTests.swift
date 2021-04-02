@@ -1,9 +1,9 @@
 import XCTest
-import StringReader
+import StringDecoder
 
-final class StringReaderTests: XCTestCase {
+final class StringDecoderTests: XCTestCase {
     func testCharacterParser() {
-        let coder: StringReader<Character> = match("1")
+        let coder: StringDecoder<Character> = match("1")
         
         switch coder.map({ Int(String($0))! }).decode("1ice") {
         case .success(let (element, next)):
@@ -15,7 +15,7 @@ final class StringReaderTests: XCTestCase {
     }
     
     func testCharacterParserFail() {
-        let coder: StringReader<Character> = match("C")
+        let coder: StringDecoder<Character> = match("C")
         
         switch coder.decode("c") {
         case .success(_):
@@ -25,8 +25,8 @@ final class StringReaderTests: XCTestCase {
         }
     }
     
-    func testStringReader() {
-        let coder: StringReader<String> = match("this")
+    func testStringDecoder() {
+        let coder: StringDecoder<String> = match("this")
         switch coder.decode("this1") {
         case .success(let (element, next)):
             XCTAssertTrue(element == "this")
@@ -36,8 +36,8 @@ final class StringReaderTests: XCTestCase {
         }
     }
     
-    func testStringReaderFail() {
-        let coder: StringReader<String> = match("this2")
+    func testStringDecoderFail() {
+        let coder: StringDecoder<String> = match("this2")
         switch coder.decode("this1") {
         case .success(_):
             XCTFail()
@@ -47,8 +47,8 @@ final class StringReaderTests: XCTestCase {
     }
 
     func testCombineParsers() {
-        let coder: StringReader<String> = match("this")
-        let spaceCoder: StringReader<String> = match(" ")
+        let coder: StringDecoder<String> = match("this")
+        let spaceCoder: StringDecoder<String> = match(" ")
         switch coder.discard(spaceCoder).decode("this ") {
         case .success(let (element, next)):
             XCTAssertTrue(element == "this")
@@ -59,8 +59,8 @@ final class StringReaderTests: XCTestCase {
     }
 
     func testChoiceOperation() {
-        let boolTrue: StringReader<Character> = match("t")
-        let boolFalse: StringReader<Character> = match("f")
+        let boolTrue: StringDecoder<Character> = match("t")
+        let boolFalse: StringDecoder<Character> = match("f")
         
         switch boolTrue.or(boolFalse).decode("t") {
         case .success(let (element, next)):
@@ -72,7 +72,7 @@ final class StringReaderTests: XCTestCase {
     }
 
     func testTakeWhile() {
-        let decoder: StringReader<String> = takeWhile(isDigit)
+        let decoder: StringDecoder<String> = takeWhile(isDigit)
         switch decoder.decode("1122one") {
         case .success(let (element, next)):
             XCTAssertTrue(element == "1122")
@@ -83,7 +83,7 @@ final class StringReaderTests: XCTestCase {
     }
 
     func testDecodingManyChars() {
-        let coder: StringReader<Character> = match("c")
+        let coder: StringDecoder<Character> = match("c")
         
         switch coder.many.decode("ccc123") {
         case .success(let (element, next)):
@@ -103,7 +103,7 @@ final class StringReaderTests: XCTestCase {
     }
 
     func testtDecodingManyStrings() {
-        let coder: StringReader<String> = match("c1")
+        let coder: StringDecoder<String> = match("c1")
         
         switch coder.many.decode("c1c1c1123") {
         case .success(let (element, next)):
@@ -123,7 +123,7 @@ final class StringReaderTests: XCTestCase {
     }
 
     func testtDecodingSome() {
-        let coder: StringReader<Character> = match("c")
+        let coder: StringDecoder<Character> = match("c")
         
         switch coder.some(error: .mismatchedCharacter).decode("ccc123") {
         case .success(let (element, next)):
@@ -167,7 +167,7 @@ final class StringReaderTests: XCTestCase {
             let argument: [String]
         }
 
-        let argumentDecoder: StringReader<String> =
+        let argumentDecoder: StringDecoder<String> =
             takeWhile({ $0 != " " && $0 != ")" })
 
         let systemCallDecoder = match("(")

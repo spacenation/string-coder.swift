@@ -1,8 +1,8 @@
 import Foundation
 
-public extension StringReader {
-    var many: StringReader<[Element]> {
-        StringReader<[Element]> { input in
+public extension StringDecoder {
+    var many: StringDecoder<[Element]> {
+        StringDecoder<[Element]> { input in
             var items: [Element] = []
             var input1 = input
             while case let .success((output, input2)) = self.decode(input1) {

@@ -1,6 +1,6 @@
 import Foundation
 
-public func match(_ s: String) -> StringReader<String> {
+public func match(_ s: String) -> StringDecoder<String> {
     if let (head, tail) = Array(s).deconstructed {
         return match(head)
             .discardThen(match(String(tail)))
