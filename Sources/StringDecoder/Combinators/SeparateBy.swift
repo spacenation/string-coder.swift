@@ -1,6 +1,6 @@
 import Foundation
 
-public extension StringDecoder {
+public extension Decoder where Primitive == Character {
     func separate<A>(by separator: StringDecoder<A>) -> StringDecoder<[Element]> {
         separator
             .discardThen(self)
