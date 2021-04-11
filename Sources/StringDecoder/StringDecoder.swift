@@ -1,21 +1,10 @@
 import Foundation
 @_exported import Functional
 
-public struct StringDecoder<Element> {
-    public typealias Output = Result<(element: Element, next: String), CharacterDecodingFailure>
-    
-    public let decode: (String) -> Output
-    
-    public init(decode: @escaping (String) -> Output) {
-        self.decode = decode
-    }
-    
-    func callAsFunction(_ input: String) -> Output {
-        decode(input)
+public typealias StringDecoder<Element> = Decoder<Character, Element>
+
+public extension Decoder where Primitive == Character {
+    func callAsFunction(_ string: String) -> Output {
+        decode(DecoderState(list: List(string), offset: 0))
     }
 }
-
-public enum CharacterDecodingFailure: Error, Equatable {
-    case mismatchedCharacter
-}
-

@@ -1,7 +1,7 @@
 import Foundation
 
-public extension StringDecoder {
-    func some(error: CharacterDecodingFailure) -> StringDecoder<[Element]> {
+public extension Decoder where Primitive == Character {
+    func some() -> StringDecoder<[Element]> {
         StringDecoder<[Element]> { input in
             var items: [Element] = []
             var input1 = input
@@ -12,7 +12,7 @@ public extension StringDecoder {
             if items.count > 0 {
                 return .success((items, input1))
             } else {
-                return .failure(error)
+                return .failure(.mismatchedCount)
             }
         }
     }

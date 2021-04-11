@@ -1,6 +1,6 @@
 import Foundation
 
-public extension StringDecoder {
+public extension Decoder where Primitive == Character {
     var many: StringDecoder<[Element]> {
         StringDecoder<[Element]> { input in
             var items: [Element] = []
