@@ -144,7 +144,7 @@ final class StringDecoderTests: XCTestCase {
     func testCombinators() {
         struct SystemCall: Equatable {
             let name: String
-            let argument: [String]
+            let argument: List<String>
         }
 
         let argumentDecoder: StringDecoder<String> =
