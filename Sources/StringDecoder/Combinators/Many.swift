@@ -8,7 +8,7 @@ public extension Decoder where Primitive == Character {
             var input1 = input
             while case let .success((output, input2)) = self.decode(input1) {
                 input1 = input2
-                items = items.append(List(output))
+                items = items.append(List(head: output))
             }
             return .success((items, input1))
         }

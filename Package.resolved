@@ -2,12 +2,39 @@
   "object": {
     "pins": [
       {
+        "package": "Currying",
+        "repositoryURL": "git@github.com:spacenation/currying-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "eb9d0e3522f9b7b0ab44a3d4c334e14e2e1eda92",
+          "version": "0.2.0"
+        }
+      },
+      {
         "package": "Functional",
         "repositoryURL": "git@github.com:spacenation/functional-swift.git",
         "state": {
           "branch": null,
-          "revision": "cc369b3c7f031ca6ea7b43edf38d7e78b649a080",
-          "version": "0.3.2"
+          "revision": "188f0d5f9c2c5ab36138779017d9c967ccaf8326",
+          "version": "0.4.7"
+        }
+      },
+      {
+        "package": "List",
+        "repositoryURL": "git@github.com:spacenation/list-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "d881af55a220b299c2e92091f371dd3d42957a1e",
+          "version": "0.3.0"
+        }
+      },
+      {
+        "package": "Operators",
+        "repositoryURL": "git@github.com:spacenation/operators-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "d0615eeae8c868523cb682f3c7fa108b2feb79f0",
+          "version": "0.2.0"
         }
       }
     ]
