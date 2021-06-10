@@ -7,7 +7,7 @@ public extension Decoder where Primitive == Character {
             .discardThen(self)
             .many
             .apply(
-                self.map(curry(<>))
+                self.map(curry(+))
             )
     }
 }
