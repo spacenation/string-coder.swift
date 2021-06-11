@@ -9,10 +9,10 @@ let package = Package(
         .library(name: "StringDecoder", targets: ["StringDecoder"])
     ],
     dependencies: [
-        .package(name: "Functional", url: "git@github.com:spacenation/functional-swift.git", from: "0.4.9")
+        .package(name: "Decoder", url: "git@github.com:spacenation/swift-decoder.git", from: "0.1.0")
     ],
     targets: [
-        .target(name: "StringDecoder", dependencies: ["Functional"]),
+        .target(name: "StringDecoder", dependencies: ["Decoder"]),
         .testTarget(name: "StringDecoderTests", dependencies: ["StringDecoder"])
     ]
 )

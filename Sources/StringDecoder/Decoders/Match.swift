@@ -1,5 +1,4 @@
 import Foundation
-import Functional
 
 public func match(_ s: String) -> StringDecoder<String> {
     switch List(s) {

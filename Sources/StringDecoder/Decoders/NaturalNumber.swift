@@ -1,5 +1,4 @@
 import Foundation
-import Functional
 
 public let naturalNumber: StringDecoder<UInt> =
     StringDecoder<UInt> { input in

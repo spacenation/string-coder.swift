@@ -1,5 +1,5 @@
 import Foundation
-import Currying
+import Functions
 
 public extension Decoder where Primitive == Character {
     func separate<A>(by separator: StringDecoder<A>) -> StringDecoder<List<Element>> {

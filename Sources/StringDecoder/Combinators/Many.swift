@@ -1,5 +1,4 @@
 import Foundation
-import List
 
 public extension Decoder where Primitive == Character {
     var many: StringDecoder<List<Element>> {

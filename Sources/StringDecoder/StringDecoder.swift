@@ -1,5 +1,5 @@
 import Foundation
-@_exported import Functional
+@_exported import Decoder
 
 public typealias StringDecoder<Element> = Decoder<Character, Element>
 

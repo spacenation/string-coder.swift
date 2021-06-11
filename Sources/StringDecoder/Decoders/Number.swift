@@ -1,5 +1,4 @@
 import Foundation
-import Functional
 
 public let number: StringDecoder<Int> =
     StringDecoder<Int> { input in
