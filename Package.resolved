@@ -2,39 +2,30 @@
   "object": {
     "pins": [
       {
-        "package": "Currying",
-        "repositoryURL": "git@github.com:spacenation/currying-swift.git",
+        "package": "Decoder",
+        "repositoryURL": "git@github.com:spacenation/swift-decoder.git",
         "state": {
           "branch": null,
-          "revision": "eb9d0e3522f9b7b0ab44a3d4c334e14e2e1eda92",
-          "version": "0.2.0"
+          "revision": "5034b00edc27d2fd116e20a4e1b3f0279df193a2",
+          "version": "0.2.2"
         }
       },
       {
-        "package": "Functional",
-        "repositoryURL": "git@github.com:spacenation/functional-swift.git",
+        "package": "Functions",
+        "repositoryURL": "git@github.com:spacenation/swift-functions.git",
         "state": {
           "branch": null,
-          "revision": "188f0d5f9c2c5ab36138779017d9c967ccaf8326",
-          "version": "0.4.7"
-        }
-      },
-      {
-        "package": "List",
-        "repositoryURL": "git@github.com:spacenation/list-swift.git",
-        "state": {
-          "branch": null,
-          "revision": "d881af55a220b299c2e92091f371dd3d42957a1e",
+          "revision": "bb058100c78cfed9bf894569f66d5d0ee837fe8f",
           "version": "0.3.0"
         }
       },
       {
-        "package": "Operators",
-        "repositoryURL": "git@github.com:spacenation/operators-swift.git",
+        "package": "List",
+        "repositoryURL": "git@github.com:spacenation/swift-list.git",
         "state": {
           "branch": null,
-          "revision": "d0615eeae8c868523cb682f3c7fa108b2feb79f0",
-          "version": "0.2.0"
+          "revision": "fb70a00e7a7cd6fa47ab7fd509ab638a1fe81f04",
+          "version": "0.3.3"
         }
       }
     ]
