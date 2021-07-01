@@ -125,7 +125,7 @@ final class StringDecoderTests: XCTestCase {
     func testDecodingSome() {
         let coder: StringDecoder<Character> = match("c")
         
-        switch coder.some()("ccc123") {
+        switch coder.some("ccc123") {
         case .success(let (element, next)):
             XCTAssertTrue(element == ["c", "c", "c"])
             XCTAssertTrue(next.list == List("123"))
@@ -133,7 +133,7 @@ final class StringDecoderTests: XCTestCase {
             XCTFail()
         }
         
-        switch coder.some()("") {
+        switch coder.some("") {
         case .success(_):
             XCTFail()
         case .failure(let error):

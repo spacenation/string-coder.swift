@@ -6,8 +6,8 @@
         "repositoryURL": "git@github.com:spacenation/swift-decoder.git",
         "state": {
           "branch": null,
-          "revision": "5034b00edc27d2fd116e20a4e1b3f0279df193a2",
-          "version": "0.2.2"
+          "revision": "b6fb0ee18bf41b24cee1c351d29ed4f78dc81862",
+          "version": "0.2.5"
         }
       },
       {
@@ -26,6 +26,15 @@
           "branch": null,
           "revision": "fb70a00e7a7cd6fa47ab7fd509ab638a1fe81f04",
           "version": "0.3.3"
+        }
+      },
+      {
+        "package": "Operators",
+        "repositoryURL": "git@github.com:spacenation/swift-operators.git",
+        "state": {
+          "branch": null,
+          "revision": "f13b10ac0d3fac58bd8a2867adae28e9fb1c7447",
+          "version": "0.2.1"
         }
       }
     ]
